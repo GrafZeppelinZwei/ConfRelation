@@ -1,0 +1,43 @@
+{
+    "finel": [],
+    "intRell": [],
+    "keyvalkeyl": [],
+    "missingl": [
+        [
+            [
+                {
+                    "internedTextId": 594,
+                    "uninternedText": "a3"
+                },
+                {
+                    "internedTextId": 627,
+                    "uninternedText": "a4"
+                }
+            ],
+            {
+                "fls": 0,
+                "tot": 3,
+                "tru": 3
+            }
+        ],
+        [
+            [
+                {
+                    "internedTextId": 812,
+                    "uninternedText": "a1"
+                },
+                {
+                    "internedTextId": 997,
+                    "uninternedText": "a2"
+                }
+            ],
+            {
+                "fls": 0,
+                "tot": 3,
+                "tru": 3
+            }
+        ]
+    ],
+    "orderl": [],
+    "typeErrl": []
+}

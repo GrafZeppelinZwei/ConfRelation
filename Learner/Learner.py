@@ -5,7 +5,6 @@ Created on Tue Jan 21 17:33:58 2020
 @author: HjYe
 """
 from abc import ABCMeta, abstractmethod
-from Rule.Rule import Rule
 
 class Learner:
     __metaclass__ = ABCMeta

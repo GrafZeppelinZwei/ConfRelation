@@ -4,10 +4,10 @@ Created on Tue Feb  4 15:07:22 2020
 
 @author: 51974
 """
-import re
 
 from Learner.Learner import Learner
 from Rule.TypeRule import TypeRule
+from utils import all_keys
 class TypeLearner(Learner):
     def __init__(self, spt_thresh, cfd_thresh):
         Learner.__init__(self, spt_thresh, cfd_thresh)
@@ -19,11 +19,7 @@ class TypeLearner(Learner):
         if depth != 1:
             return rules
 
-        keys = set()
-        for record in data:
-            for key in record.keys():
-                keys.add(key)
-        
+        keys = all_keys(data)
         all_type =TypeRule.all_type()
         for key in keys:
             for type_str in all_type:

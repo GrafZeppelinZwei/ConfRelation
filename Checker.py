@@ -59,10 +59,9 @@ if __name__ == "__main__":
     args = parse_arg()
     translator = TranslatorFactory.build_translator(args['cfg_type'])
     record = translator.translate_file(args['file_path'])
-    #record = translator.confirm_type([record,])[0]
-    #record = translator.convert_value([record,])[0]
-    for k,v in record.items():
-        print(k, ":", v)
+
+    #for k,v in record.items():
+    #    print(k, ":", v)
     checker = Checker(args['rule_path'])
     checker.check(record)
     checker.display()

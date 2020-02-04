@@ -6,6 +6,7 @@ Created on Wed Jan 22 13:18:20 2020
 """
 from Learner.Learner import Learner
 from Rule.MissingRule import MissingRule
+from utils import all_keys
 
 class MissingLearner(Learner):
     def __init__(self, spt_thresh, cfd_thresh):
@@ -16,10 +17,7 @@ class MissingLearner(Learner):
     def gen_rules(self, rules, data, depth):
         new_rules = []
         if depth == 0:
-            keys = set()
-            for record in data:
-                for key in record.keys():
-                    keys.add(key)
+            keys = all_keys(data)
             for key in keys:
                 rule = MissingRule(None, [key,])
                 new_rules.append(rule)

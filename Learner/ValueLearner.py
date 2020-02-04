@@ -59,7 +59,9 @@ class ValueLearner(Learner):
         if '>' not in value_relation_count.keys():
             value_relation_count['>'] = 0
         value_relation_count.pop('total')
-        
+        if None in value_relation_count.keys():
+            value_relation_count.pop(None)
+                    
         value_relation_count['<='] = value_relation_count['<']+value_relation_count['=']
         value_relation_count['>='] = value_relation_count['>']+value_relation_count['=']
         max_count = max(value_relation_count.values())

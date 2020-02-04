@@ -15,8 +15,12 @@ class ValueRule(Rule):
     def appearance(self, record):
         if not self.subj in record.keys():
             return False
+        elif record[self.subj]['value'] == None:
+            return False
         for obj in self.objs:
             if not obj in record.keys():
+                return False
+            elif record[obj]['value'] == None:
                 return False
         return True
     

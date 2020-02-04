@@ -34,6 +34,9 @@ class Input:
         learner_flags = {}
         learner_flags['missing'] = cfg['enablemissing']
         learner_flags['value'] = cfg['enablevalue']
+        learner_flags['type'] = cfg['enabletype']
+        if learner_flags['type']:
+            learner_flags['value'] = True
         return learner_flags
         
     def parse_arg(self):
@@ -43,9 +46,10 @@ class Input:
         parser.add_argument('--output_path', action='store', default=None)
         parser.add_argument('--cfg_type', action='store', default='csv')
         parser.add_argument('--spt_thresh', action='store', default=0.01)
-        parser.add_argument('--cfd_thresh', action='store', default=1.0)
-        parser.add_argument('--enablemissing', action='store_true')
+        parser.add_argument('--cfd_thresh', action='store', default=0.98)
+        parser.add_argument('--enablemissing', action='store_true', default=False)
         parser.add_argument('--enablevalue', action='store_true', default=True)
+        parser.add_argument('--enabletype', action='store_true', default=True)
         args=parser.parse_args(sys.argv[1:])
         return vars(args)
     

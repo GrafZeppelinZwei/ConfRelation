@@ -9,8 +9,9 @@ import argparse
 import sys
 
 from Rule.RuleFactory import RuleFactory
-
+from Rule.TypeRule import TypeRule
 from Translator.TranslatorFactory import TranslatorFactory
+
 class Checker:
     def __init__(self, file_path):
         file = open(file_path)
@@ -27,6 +28,10 @@ class Checker:
                 appearance_type = rule.analysis_record_type(record)
                 if appearance_type == 'obey':
                     self.fails.append(rule)
+                if rule.__class__ ==TypeRule and \
+                    rule.subj in record.keys():
+                    value = record[rule.subj]['value']
+                    record[rule.subj]['value'] = TypeRule.convert_value(rule.objs[0], value)
         return self.fails
     
     def display(self):
@@ -54,10 +59,10 @@ if __name__ == "__main__":
     args = parse_arg()
     translator = TranslatorFactory.build_translator(args['cfg_type'])
     record = translator.translate_file(args['file_path'])
-    record = translator.confirm_type([record,])[0]
-    record = translator.convert_value([record,])[0]
+    #record = translator.confirm_type([record,])[0]
+    #record = translator.convert_value([record,])[0]
     for k,v in record.items():
         print(k, ":", v)
     checker = Checker(args['rule_path'])
     checker.check(record)
-    #checker.display()
+    checker.display()

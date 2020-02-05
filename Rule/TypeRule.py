@@ -10,7 +10,7 @@ from Rule.Rule import Rule
 class TypeRule(Rule):
     patterns = {'int': [re.compile('^\d+$'),],
                 'size': [re.compile('^\d+(([K|M|G|T]B?)|B)$'),],
-                'path': [re.compile(r'^[a-zA-Z]:(((\\(?! )[^/:*?<>\""|\\]+)+\\?)|(\\)?)\s*$'),
+                'path': [re.compile(r'^[a-zA-Z]:(((\\{1,2}(?! )[^/:*?<>\""|\\]+)+\\?)|(\\)?)\s*$'),
                                  re.compile(r'^(\/([0-9a-zA-Z_.\-]+))+$')]}
     
     def appearance(self, record):

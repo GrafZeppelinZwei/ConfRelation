@@ -7,5 +7,4 @@
 # Ignore bundler config.
 /tests/*
 /__pycache__/*
-/rules.json
 *.pyc

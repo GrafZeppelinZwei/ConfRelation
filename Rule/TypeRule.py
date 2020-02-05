@@ -36,7 +36,6 @@ class TypeRule(Rule):
     
     def is_typeof(type_str, value):
         patterns = TypeRule.patterns[type_str]
-        print(type_str, value)
         for pattern in patterns:
             if pattern.match(value) != None:
                 return True

@@ -8,8 +8,10 @@ import re
 from Rule.Rule import Rule
 
 class TypeRule(Rule):
-    patterns = {'int': re.compile("^\d+$"),
-                'size': re.compile("^\d+(([K|M|G|T]B?)|B)$"),}
+    patterns = {'int': [re.compile('^\d+$'),],
+                'size': [re.compile('^\d+(([K|M|G|T]B?)|B)$'),],
+                'path': [re.compile(r'^[a-zA-Z]:(((\\(?! )[^/:*?<>\""|\\]+)+\\?)|(\\)?)\s*$'),
+                                 re.compile(r'^(\/([0-9a-zA-Z_.\-]+))+$')]}
     
     def appearance(self, record):
         if self.subj in record.keys():
@@ -33,11 +35,12 @@ class TypeRule(Rule):
         print(sentence)
     
     def is_typeof(type_str, value):
-        pattern = TypeRule.patterns[type_str]
-        if pattern.match(value) != None:
-            return True
-        else:
-            return False
+        patterns = TypeRule.patterns[type_str]
+        print(type_str, value)
+        for pattern in patterns:
+            if pattern.match(value) != None:
+                return True
+        return False
         
     def all_type():
         return TypeRule.patterns.keys()

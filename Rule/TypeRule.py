@@ -11,7 +11,8 @@ class TypeRule(Rule):
     patterns = {'int': [re.compile('^\d+$'),],
                 'size': [re.compile('^\d+(([K|M|G|T]B?)|B)$'),],
                 'path': [re.compile(r'^[a-zA-Z]:(((\\{1,2}(?! )[^/:*?<>\""|\\]+)+\\?)|(\\)?)\s*$'),
-                                 re.compile(r'^(\/([0-9a-zA-Z_.\-]+))+$')]}
+                                 re.compile(r'^(\/([0-9a-zA-Z_.\-]+))+$')],
+                'bool': [re.compile('^(True|False|ON|OFFF)$', re.I),]}
     
     def appearance(self, record):
         if self.subj in record.keys():

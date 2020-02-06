@@ -25,7 +25,7 @@ class MysqlTranslator(Translator):
             if MysqlTranslator.pattern_comment.match(line):
                 continue
             elif MysqlTranslator.pattern_namespace.match(line):
-                namespace = re.split("\[|\]", line)[1]
+                namespace = line
             elif MysqlTranslator.pattern_config.match(line):
                 line = re.split("#", line)[0]
                 item = re.split("=", line)
@@ -38,7 +38,7 @@ class MysqlTranslator(Translator):
         return items
     
     def append_cfg_item(self, cfg, item):
-        key = item[2]+'_'+item[0]
+        key = item[2]+' '+item[0]
         cfg[key] = {'value': item[1], 'type': None}
 
 if __name__ == '__main__':    

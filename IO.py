@@ -45,7 +45,7 @@ class Input:
         parser.add_argument('--folder_path', action='store', default=None)
         parser.add_argument('--output_path', action='store', default=None)
         parser.add_argument('--cfg_type', action='store', default='csv')
-        parser.add_argument('--spt_thresh', action='store', default=0.01)
+        parser.add_argument('--spt_thresh', action='store', default=0.1)
         parser.add_argument('--cfd_thresh', action='store', default=0.98)
         parser.add_argument('--enablemissing', action='store_true', default=False)
         parser.add_argument('--enablevalue', action='store_true', default=False)

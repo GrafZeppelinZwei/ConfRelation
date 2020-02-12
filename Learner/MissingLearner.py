@@ -11,7 +11,7 @@ from utils import all_keys
 class MissingLearner(Learner):
     def __init__(self, spt_thresh, cfd_thresh):
         Learner.__init__(self, spt_thresh, cfd_thresh)
-        self.depth = 3
+        self.depth = 1
         self.rule_type = 'missing'
         
     def gen_rules(self, rules, data, depth):

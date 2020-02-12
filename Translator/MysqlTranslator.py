@@ -8,7 +8,7 @@ import re
 from Translator.Translator import Translator
 
 class MysqlTranslator(Translator):
-    pattern_comment = re.compile("^#.*")
+    pattern_comment = re.compile("^#|!.*")
     pattern_namespace = re.compile("^\[.*\]$")
     pattern_config = re.compile("^.*=.*$")
     def __init__(self):
@@ -19,7 +19,8 @@ class MysqlTranslator(Translator):
         lines = file.readlines()
         namespace = ''
         for line in lines:
-            line = line.replace(' ', '').strip()
+            line = line.replace(' ', '')
+            line = line.replace('\t', '').strip()
             if line == '':
                 continue
             if MysqlTranslator.pattern_comment.match(line):

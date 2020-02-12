@@ -8,11 +8,7 @@ import re
 from Rule.Rule import Rule
 
 class TypeRule(Rule):
-    patterns = {'int': [re.compile('^\d+$'),],
-                'size': [re.compile('^\d+(([K|M|G|T]B?)|B)$'),],
-                'path': [re.compile(r'^[a-zA-Z]:(((\\{1,2}(?! )[^/:*?<>\""|\\]+)+\\?)|(\\)?)\s*$'),
-                                 re.compile(r'^(\/([0-9a-zA-Z_.\-]+))+$')],
-                'bool': [re.compile('^(True|False|ON|OFFF)$', re.I),]}
+    types = ['int', 'size', 'path', 'bool', 'ipaddr']
     
     def appearance(self, record):
         if self.subj in record.keys():
@@ -36,14 +32,51 @@ class TypeRule(Rule):
         print(sentence)
     
     def is_typeof(type_str, value):
-        patterns = TypeRule.patterns[type_str]
+        func_name = 'is_'+type_str
+        func = getattr(TypeRule, func_name)
+        return func(value)
+    
+    def is_int(value):
+        pattern = re.compile('^\d+$')
+        if pattern.match(value) != None:
+            return True
+        else:
+            return False
+        
+    def is_size(value):
+        pattern = re.compile('^\d+(([K|M|G|T]B?)|B)$')
+        if pattern.match(value) != None:
+            return True
+        else:
+            return False
+    
+    def is_path(value):
+        patterns = [re.compile(r'^[a-zA-Z]:(((\\{1,2}(?! )[^/:*?<>\""|\\]+)+\\?)|(\\)?)\s*$'),
+                                 re.compile(r'^(\/([0-9a-zA-Z_.\-]+))+$')]
         for pattern in patterns:
             if pattern.match(value) != None:
                 return True
         return False
-        
+    
+    def is_bool(value):
+        pattern = re.compile('^(True|False|ON|OFFF)$', re.I)
+        if pattern.match(value) != None:
+            return True
+        else:
+            return False
+    
+    def is_ipaddr(value):
+        pattern = re.compile('^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$')
+        if pattern.match(value) == None:
+            return False
+        nums = value.split('.')
+        for num in nums:
+            if int(num)<0 or int(num)>255:
+                return False
+        return True
+    
     def all_type():
-        return TypeRule.patterns.keys()
+        return TypeRule.types
     
     def convert_value(type_str, value):
         if type_str == 'int':

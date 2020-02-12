@@ -26,7 +26,7 @@ class Translator:
         return cfgs
             
     def translate_file(self, file_path):
-        file = open(file_path, 'r')
+        file = open(file_path, 'r',encoding = 'utf-8')
         items = self.extract_items(file)
         cfg = {}
         for item in items:

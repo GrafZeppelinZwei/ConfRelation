@@ -68,6 +68,9 @@ class Learner:
         tot_count = record_type_count['total']
         
         support =1.*support_count/tot_count
-        confidence = 1.*support_count/(support_count+obey_count)
+        if support_count+obey_count == 0:
+            confidence = 0
+        else:
+            confidence = 1.*support_count/(support_count+obey_count)
         return support, confidence
     

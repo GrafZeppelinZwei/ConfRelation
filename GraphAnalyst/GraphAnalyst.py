@@ -65,7 +65,17 @@ class ConfGraph:
         for edges in self.edges.values():
             for edge in edges:
                 edge.display()
-                
+    
+    def compute_importance(self, rule):
+        vrt_num = len(rule.objs)+1
+        src_vrt = self.get_vrt(rule.subj)
+        tot_degree = src_vrt.degree
+        for obj in rule.objs:
+            dst_vrt = self.get_vrt(obj)
+            tot_degree += dst_vrt.degree
+        importance = 1.*tot_degree/vrt_num
+        return importance
+    
 if __name__ == "__main__":
     import json
     file = open("../tests/rules.json")
@@ -79,3 +89,6 @@ if __name__ == "__main__":
             all_rules.append(rule_obj)
     graph = ConfGraph(all_rules)
     graph.display()
+    all_rules[1].display()
+    print(graph.compute_importance(all_rules[1]))
+    

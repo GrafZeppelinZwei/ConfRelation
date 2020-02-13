@@ -76,6 +76,22 @@ class ConfGraph:
         importance = 1.*tot_degree/vrt_num
         return importance
     
+    def compute_complexity(self, vrt_name='', vrt=None):
+        if vrt_name != '':
+            vrt = self.get_vrt(vrt_name)
+        complexity = 0
+        for edges in self.edges.values():
+            tot_edges = len(edges)
+            if tot_edges == 0:
+                complexity +=1
+                continue
+            related_edges = 0
+            for edge in edges:
+                if edge.dst_vrt.name == vrt.name:
+                    related_edges +=1
+            complexity += 1-(1.*related_edges/tot_edges)
+        return complexity
+    
 if __name__ == "__main__":
     import json
     file = open("../tests/rules.json")

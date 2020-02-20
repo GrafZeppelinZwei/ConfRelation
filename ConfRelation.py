@@ -7,6 +7,7 @@ Created on Mon Jan 20 22:57:34 2020
 from IO import parse_input, display, output
 from Translator.TranslatorFactory import TranslatorFactory
 from Learner.LearnerFactory import LearnerFactory
+from GraphAnalyst.GraphAnalyst import ConfGraph
 
 class ConfRelation:
     def __init__(self, input_info):
@@ -22,6 +23,14 @@ class ConfRelation:
         rules = []
         for learner in self.learners:
             rules.append(learner.learn(data))
+        
+        rules_ = []
+        for rs in rules:
+            for rule in rs['rules']:
+                rules_.append(rule)
+        graph = ConfGraph(rules_)
+        for rule in rules_:
+            rule.importance = graph.compute_importance(rule)
         display(rules)
         output(input_info.output_path, rules)
     

@@ -24,7 +24,7 @@ class ConfEdge:
         self.class_type = class_type
         
     def display(self):
-        print(self.src_vrt.name, "->", self.dst_vrt.name, self.weight)
+        print(self.src_vrt.name+"->"+self.dst_vrt.name+":", self.weight)
     
 class ConfGraph:
     def __init__(self, rules):
@@ -58,10 +58,10 @@ class ConfGraph:
                 edge.dst_vrt.degree += edge.weight
     
     def display(self):
-        print('vertices:')
+        print('vertices: degree')
         for vrt in self.vrts.values():
             vrt.display()
-        print('edges:')
+        print('edges: weight')
         for edges in self.edges.values():
             for edge in edges:
                 edge.display()
@@ -105,6 +105,7 @@ if __name__ == "__main__":
             all_rules.append(rule_obj)
     graph = ConfGraph(all_rules)
     graph.display()
-    all_rules[1].display()
-    print(graph.compute_importance(all_rules[1]))
+    for rule in all_rules:
+        rule.display()
+        print("importance:",graph.compute_importance(rule))
     

@@ -8,8 +8,8 @@ Created on Tue Jan 28 12:13:57 2020
 from Rule.Rule import Rule
 
 class ValueRule(Rule): 
-    def __init__(self, subj, objs, support = 0, confidence = 0, value_relation = ''):
-        Rule.__init__(self, subj, objs, support, confidence)
+    def __init__(self, subj, objs, support = 0, confidence = 0, importance = 0, value_relation = ''):
+        Rule.__init__(self, subj, objs, support, confidence, importance)
         self.value_relation = value_relation
         
     def appearance(self, record):
@@ -35,8 +35,8 @@ class ValueRule(Rule):
         return True
     
     def display(self):
-        sentence = "value of %s should %s values of %s, confidence: %f, support: %f" \
-          %(self.subj, self.value_relation, self.objs, self.confidence, self.support)
+        sentence = "value of %s should %s values of %s, confidence: %f, support: %f, importance: %f" \
+          %(self.subj, self.value_relation, self.objs, self.confidence, self.support, self.importance)
         print(sentence)
         
     def value_satisfy(self, subj_value, objs_value):

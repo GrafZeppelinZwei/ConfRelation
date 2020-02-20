@@ -27,8 +27,8 @@ class TypeRule(Rule):
             return False
     
     def display(self):
-        sentence = "%s should be type of %s, confidence: %f, support: %f"% \
-         (self.subj, self.objs[0], self.confidence, self.support)
+        sentence = "%s should be type of %s, confidence: %f, support: %f, importance: %f"% \
+         (self.subj, self.objs[0], self.confidence, self.support, self.importance)
         print(sentence)
     
     def is_typeof(type_str, value):
@@ -86,7 +86,14 @@ class TypeRule(Rule):
                 value = None
         if type_str == 'size':
             if TypeRule.is_typeof('size', value):
+                size = (re.split("\D+",value))[1]
                 value = int(re.split("\D+", value)[0])
+                if size == 'K' or size == 'KB':
+                    value *= 1024
+                if size == 'M' or size == 'MB':
+                    value *= 1024*1024
+                if size == 'G' or size == 'GB':
+                    value *= 1024*1024*1024
             else:
                 value = None
         return value

@@ -10,21 +10,22 @@ from Rule.ValueRule import ValueRule
 from Rule.TypeRule import TypeRule
 
 class RuleFactory:
-    def build_rule(type_str, subj = None, objs = [], support = 0, confidence = 0, json = None):
+    def build_rule(type_str, subj = None, objs = [], support = 0, confidence = 0, importance = 0, json = None):
         if json != None:
             subj = json['subj']
             objs = json['objs']
             support = json['support']
             confidence = json['confidence']
+            importance = json['importance']
             
         if type_str == 'missing':
-            rule = MissingRule(subj, objs, support, confidence)
+            rule = MissingRule(subj, objs, support, confidence, importance)
         elif type_str == 'value':
             if json != None:
                 value_relation = json['value_relation']
-            rule = ValueRule(subj, objs, support, confidence, value_relation)
+            rule = ValueRule(subj, objs, support, confidence, importance, value_relation)
         elif type_str == 'type':
-            rule = TypeRule(subj, objs, support, confidence)
+            rule = TypeRule(subj, objs, support, confidence, importance)
         else:
             rule = None
         return rule

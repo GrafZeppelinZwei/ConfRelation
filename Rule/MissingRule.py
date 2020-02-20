@@ -25,6 +25,6 @@ class MissingRule(Rule):
         return True
     
     def display(self):
-        sentence = "when %s appear, %s should appear. confidence: %f, support: %f" \
-          %(self.subj, self.objs, self.confidence, self.support)
+        sentence = "when %s appear, %s should appear. confidence: %f, support: %f, importance: %f" \
+          %(self.subj, self.objs, self.confidence, self.support, self.importance)
         print(sentence)

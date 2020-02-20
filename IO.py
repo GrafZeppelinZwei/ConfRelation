@@ -60,6 +60,7 @@ def parse_input():
 def display(all_rules):
     for rules in all_rules:
         print(rules['name']+" rules:")
+        rules['rules'].sort(reverse = True)
         for rule in rules['rules']:
             rule.display()
             

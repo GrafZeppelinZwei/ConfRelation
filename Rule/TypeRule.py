@@ -37,6 +37,7 @@ class TypeRule(Rule):
         return func(value)
     
     def is_int(value):
+        value = str(value)
         pattern = re.compile('^\d+$')
         if pattern.match(value) != None:
             return True
@@ -44,13 +45,16 @@ class TypeRule(Rule):
             return False
         
     def is_size(value):
+        value = str(value)
         pattern = re.compile('^\d+(([K|M|G|T]B?)|B)$')
         if pattern.match(value) != None:
             return True
-        else:
-            return False
+        elif TypeRule.is_int(value) and int(value)%1024 == 0:
+            return True
+        return False
     
     def is_path(value):
+        value = str(value)
         patterns = [re.compile(r'^[a-zA-Z]:((((\\|/){1,2}(?! )[^/:*?<>\""|(\\|/)]+)+(\\|/)?)|(\\|/)?)\s*$'),
                                  re.compile(r'^(\/([0-9a-zA-Z_.\-]+))+/?$')]
         for pattern in patterns:
@@ -86,6 +90,9 @@ class TypeRule(Rule):
                 value = None
         if type_str == 'size':
             if TypeRule.is_typeof('size', value):
+                if TypeRule.is_typeof('int', value):
+                    value = str(value)
+                    value += 'B'
                 size = (re.split("\D+",value))[1]
                 value = int(re.split("\D+", value)[0])
                 if size == 'K' or size == 'KB':

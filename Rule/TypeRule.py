@@ -51,8 +51,8 @@ class TypeRule(Rule):
             return False
     
     def is_path(value):
-        patterns = [re.compile(r'^[a-zA-Z]:(((\\{1,2}(?! )[^/:*?<>\""|\\]+)+\\?)|(\\)?)\s*$'),
-                                 re.compile(r'^(\/([0-9a-zA-Z_.\-]+))+$')]
+        patterns = [re.compile(r'^[a-zA-Z]:((((\\|/){1,2}(?! )[^/:*?<>\""|(\\|/)]+)+(\\|/)?)|(\\|/)?)\s*$'),
+                                 re.compile(r'^(\/([0-9a-zA-Z_.\-]+))+/?$')]
         for pattern in patterns:
             if pattern.match(value) != None:
                 return True

@@ -10,6 +10,7 @@ from Rule.TypeRule import TypeRule
 from utils import all_keys
 class TypeLearner(Learner):
     def __init__(self, spt_thresh, cfd_thresh):
+        spt_thresh /= 10
         Learner.__init__(self, spt_thresh, cfd_thresh)
         self.depth = 1
         self.rule_type = 'type'

@@ -21,6 +21,8 @@ class MysqlTranslator(Translator):
         for line in lines:
             line = line.replace(' ', '')
             line = line.replace('\t', '').strip()
+            line = line.replace('-', '_')
+            line = line.replace('"', '')
             if line == '':
                 continue
             if MysqlTranslator.pattern_comment.match(line):
